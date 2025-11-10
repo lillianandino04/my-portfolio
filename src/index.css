@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+:root {
+  /*primary: dark back/foreground colors */
+  --border: 210 5% 25%;              /*dark slate border*/
+  --background: 210 30% 7%;          /*black/dark blue*/
+  --foreground: 180 100% 95%;        /*pure white/light cyan text*/
+  --card-foreground: 180 100% 95%;   /*color for cards same as foreground*/
+  --card: 210 15% 12%;               /*lighter dark background for cards*/
+
+  /*primary accent color: turquoise (h:180) */
+  --primary: 180 100% 50%;
+  --primary-foreground: 210 30% 7%;  /* Text color to use on the primary accent */
+
+  /*grid effect var*/
+  --grid-color: 180 100% 100%;        /* Used for subtle grid lines */
+
+  --border: 217 33% 20%;
+}
+
+* {
+  @apply border-border;
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply bg-background text-foreground transition-colors duration-300;
+  font-feature-settings: "rlig" 1, "calt" 1;
+}
+
+/*tech effects*/
+@keyframes scanline-pulse {
+  0%, 100% { background-position: 0 0; opacity: 0.1; }
+  50% { background-position: 0 10px; opacity: 0.15; }
+}
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-subtle: pulse-subtle 4s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.7s ease-out forwards;
+  --animate-fade-in-delay-1: fade-in 0.7s ease-out 0.2s forwards;
+  --animate-fade-in-delay-2: fade-in 0.7s ease-out 0.4s forwards;
+  --animate-fade-in-delay-3: fade-in 0.7s ease-out 0.6s forwards;
+  --animate-fade-in-delay-4: fade-in 0.7s ease-out 0.8s forwards;
+
+  --animate-tech-scan: scanline-pulse 6s linear infinite alternate;
+}
+
+.tech-background {
+  background-color: hsl(var(--background));
+  min-height: 100vh;
+  overflow: hidden;
+  background-repeat: repeat;
+
+  /*grid*/
+  background-image:
+      repeating-linear-gradient(
+          90deg,
+          hsla(var(--grid-color), 0.3),
+          hsla(var(--grid-color), 0.3) 1px,
+          transparent 1px,
+          transparent 25px
+      );
+  background-size: 25px 25px;
+
+  /*scanline animation*/
+  animation: var(--animate-tech-scan);
+}
+
+@utility container {
+  margin-inline: auto;
+  padding-inline: 2 rem;
+
+  @media (width >= 640px) { max-width: 640px; }
+  @media (width >= 768px) { max-width: 768px; }
+  @media (width >= 1024px) { max-width: 1024px; }
+  @media (width >= 1280px) { max-width: 1280px; }
+  @media (width >= 1400px) { max-width: 1400px; }
+}
+
+@utility text-glow {
+  color: hsl(var(--primary-foreground)); /*bright white/light*/
+  
+  text-shadow: 
+    /*widest glow*/
+    0 0 5px hsla(var(--primary), 0.5),
+    /*medium layer*/
+    0 0 15px hsl(var(--primary)),
+    /*sharpest layer*/
+    0 0 25px hsl(var(--primary));
+}
+
+@utility name-glow {
+  color: hsl(var(--name-color)); /* Ensures text is bright white/light */
+  
+  text-shadow: 
+    /*widest glow*/
+    0 0 5px hsla(var(--name-color), 0.5),
+    /*medium layer*/
+    0 0 15px hsl(var(--name-color)),
+    /*sharpest layer*/
+    0 0 25px hsl(var(--name-color));
+}
+
+@utility card-hover {
+  @apply transition-all duration-500 ease-in-out;
+  @apply border border-gray-800;
+
+  &:hover {
+    /*lift effect*/
+    @apply transform -translate-y-1 scale-[1.01] shadow-xl;
+    
+    /*neon shadow effect*/
+    box-shadow: 
+      0 10px 20px rgba(0, 0, 0, 0.5), /* Standard deep shadow */
+      0 0 15px hsl(var(--primary)),    /* Core neon glow */
+      0 0 30px hsla(var(--primary), 0.3); /* Wider light diffusion */
+
+    /*border highlight on hover*/
+    @apply border-primary;
+  }
+}
+
+@utility circuit-trace-border {
+  /*base card*/
+  @apply relative rounded-lg bg-card text-card-foreground;
+
+  background:
+    linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--primary) / 0.5), hsl(var(--primary))) border-box; 
+  background-clip: padding-box;
+    border: 2px solid transparent;
+
+  /*inner dark background for card content*/
+  &::before {
+    content: '';
+    @apply absolute inset-[2px] rounded-[5px] bg-background -z-10;
+  }
+}
+
+@utility neon-command-button {
+  @apply px-8 py-3 rounded-md font-semibold tracking-wider uppercase;
+  @apply bg-primary text-primary-foreground;
+  @apply transition-all duration-300;
+  
+/*base text glow*/
+  text-shadow: 0 0 5px hsla(var(--primary), 0.7);
+
+  /*box shadow for subtle base glow*/
+  box-shadow: 0 0 10px hsla(var(--primary), 0.5);
+
+  &:hover {
+    /*increased scale and brightness on interaction*/
+    @apply transform scale-[1.02] bg-primary/90;
+    
+    /*intense glow effect on hover*/
+    box-shadow: 
+      0 0 15px hsl(var(--primary)),  /*medium layer*/
+      0 0 35px hsla(var(--primary), 0.8); /*wide layer*/
+  }
+
+  &:active {
+    /*push effect*/
+    @apply transform scale-[0.98];
+  }
+}
+
+#root {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0;
+  text-align: center;
+}
