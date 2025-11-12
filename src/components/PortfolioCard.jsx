@@ -22,7 +22,7 @@ export const PortfolioCard = ({ title, description, tags, delay, mediaSrc }) => 
                 {tags.map(tag => (
                     <span 
                         key={tag} 
-                        className="text-xs font-mono font-bold px-4 py-2 bg-primary/10 text-primary rounded-full border border-primary/50"
+                        className="text-s font-mono font-bold px-4 py-2 bg-primary/10 text-primary rounded-full border border-primary/50"
                     >
                         {tag}
                     </span>
