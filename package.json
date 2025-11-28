@@ -1,16 +1,16 @@
 {
-  "name": "portfolio",
+  "name": "LillianAndino.csc",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "http://lillianandino04.github.io/my-portfolio", 
+  "homepage": "https://lillianandino04.github.io/my-portfolio",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist" 
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@radix-ui/react-toast": "^1.2.15",
