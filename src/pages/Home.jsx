@@ -42,8 +42,8 @@ export const Home = () => {
                         </h2>
                         {/*neon-command-button*/}
                         <a 
-                            href="/Lillian_Andino_Granillo_Resume.pdf" //path
-                            download="Lillian_Andino_Granillo_Resume.pdf" //filename for download
+                            href="/Lillian_Andino_Resume.pdf" //path
+                            download="Lillian_Andino_Resume.pdf" //filename for download
                             className="neon-command-button inline-block" //make <a> behave like a button
                         >
                             DOWNLOAD MY RESUME HERE
